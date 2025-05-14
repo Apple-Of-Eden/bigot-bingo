@@ -24,3 +24,43 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+:root {
+  /* default grid size; overridden per-page via --grid-size */
+  --grid-size: 5;
+}
+
+/* always-square, N×N grid container */
+.grid-container {
+  /* pick the smallest of 800px, viewport width, or viewport height minus header/buttons */
+  --dim: min(800px, 100vw, calc(100vh - 200px));
+
+  width: var(--dim);
+  height: var(--dim);
+
+  margin: 0 auto;
+  padding: 8px;
+  box-sizing: border-box;
+
+  display: grid;
+  /* force exactly N columns and N rows */
+  grid-template-columns: repeat(var(--grid-size), 1fr);
+  grid-template-rows:    repeat(var(--grid-size), 1fr);
+  gap: 8px;
+
+  overflow: auto;
+}
+
+/* grid-cell styles */
+.grid-cell {
+  border: 1px solid #e5e7eb;  /* tailwind gray-200 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* highlight modifiers */
+.marker-green { background-color: rgba(52, 211, 153, 0.3); }
+.marker-red   { background-color: rgba(239,  68,  68, 0.3); }
